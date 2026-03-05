@@ -395,6 +395,11 @@ if __name__ == "__main__":
     session = requests.Session()
     session.cookies = parse_cookie_string(weread_cookie)
     client = Client(auth=notion_token, log_level=logging.ERROR)
+    # 调试信息：打印 notion_client 版本和 client 对象状态
+    import notion_client
+    print(f"notion_client version: {notion_client.__version__}")
+    print(f"client.databases type: {type(client.databases)}")
+    print(f"hasattr query: {hasattr(client.databases, 'query')}")
     session.get(WEREAD_URL)
     latest_sort = get_sort()
     books = get_notebooklist()
