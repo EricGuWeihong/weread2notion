@@ -49,7 +49,11 @@ def parse_cookie_string(cookie_string):
     return cookiejar
 
 def refresh_token(exception):
+    """判断是否需要重试：如果是连接错误则重试"""
     session.get(WEREAD_URL)
+    # 返回 True 表示需要重试，False 表示不重试
+    # 这里我们希望所有异常都重试
+    return True
 
 @retry(stop_max_attempt_number=3, wait_fixed=5000,retry_on_exception=refresh_token)
 def get_bookmark_list(bookId):
