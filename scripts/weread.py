@@ -28,6 +28,24 @@ from utils import (
     get_title,
     get_url,
 )
+
+# ============================================================
+# notion-client 版本兼容性说明
+# ============================================================
+# 本项目依赖 notion-client==2.2.1 (见 requirements.txt)
+#
+# 如果未来升级到 3.x+，需要修改以下位置的代码：
+# 1. 第 116 行：check() 函数中的 client.databases.query()
+# 2. 第 229 行：get_sort() 函数中的 client.databases.query()
+#
+# 3.x+ 的等价写法：
+#   response = client.request(
+#       path=f"databases/{database_id}/query",
+#       method="POST",
+#       body={"filter": filter, "sorts": sorts}
+#   )
+# ============================================================
+
 load_dotenv()
 WEREAD_URL = "https://weread.qq.com/"
 WEREAD_NOTEBOOKS_URL = "https://weread.qq.com/api/user/notebook"

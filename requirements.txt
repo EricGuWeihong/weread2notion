@@ -1,3 +1,14 @@
+# weread2notion 依赖说明
+#
+# notion-client 版本锁定说明：
+# - 锁定版本：2.2.1
+# - 原因：notion-client 3.x 移除了 databases.query() 方法
+# - 这是 SDK 层面的 breaking change，Notion API 本身没有废弃该端点
+# - 如果未来需要升级到 3.x+，需要将 databases.query() 改为：
+#   client.request(path=f"databases/{database_id}/query", method="POST", body={...})
+#
+# 参考：/Users/eric.gu/.claude/plans/silly-conjuring-matsumoto.md
+
 requests
 notion-client==2.2.1
 python-dotenv
